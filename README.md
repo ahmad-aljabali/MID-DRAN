@@ -1,12 +1,10 @@
 # Learning Medical Image Denoising with Deep Dynamic Residual Attention Network
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-medical-image-denoising-with-deep/medical-image-denoising-on-dermatologist)](https://paperswithcode.com/sota/medical-image-denoising-on-dermatologist?p=learning-medical-image-denoising-with-deep)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-medical-image-denoising-with-deep/medical-image-denoising-on-human-protein)](https://paperswithcode.com/sota/medical-image-denoising-on-human-protein?p=learning-medical-image-denoising-with-deep)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/learning-medical-image-denoising-with-deep/medical-image-denoising-on-lgg-segmentation)](https://paperswithcode.com/sota/medical-image-denoising-on-lgg-segmentation?p=learning-medical-image-denoising-with-deep)
 
+A fork from "sharif-apu/MID-DRAN", modified input data structure to allow the use of pre-existing noisy data, as an alternative to adding noise during processing.
 
-This is the official implementation of a state-of-the-art medical image denoising method titled as **"Dynamic Residual Attention Network (DRAN)"**. **[[Click Here](https://www.mdpi.com/2227-7390/8/12/2192/pdf)]** to download the full paper (in PDF).  </br>
+This is the official implementation of state-of-the-art medical image denoising method titled as **"Dynamic Residual Attention Network (DRAN)"**. **[[Click Here](https://www.mdpi.com/2227-7390/8/12/2192/pdf)]** to download the full paper (in PDF).  </br>
 
-**Please consider citing this paper as follows:**
+**Please consider to cite this paper as follows:**
 ```
 @article{sharif2020learning,
   title={Learning Medical Image Denoising with Deep Dynamic Residual Attention Network},
@@ -19,25 +17,6 @@ This is the official implementation of a state-of-the-art medical image denoisin
   publisher={Multidisciplinary Digital Publishing Institute}
 }
 ```
-
-Explore our work on medical image deblurring **[[Here](https://github.com/sharif-apu/MedDeblur)]**.
-
-**Consider citing our deblurring paper as follows:**
-
-```
-@article{sharif2022meddeblur,
-  title={MedDeblur: Medical Image Deblurring with Residual Dense Spatial-Asymmetric Attention},
-  author={Sharif, SMA and Naqvi, Rizwan Ali and Mehmood, Zahid and Hussain, Jamil and Ali, Ahsan and Lee, Seung-Won},
-  journal={Mathematics},
-  volume={11},
-  number={1},
-  pages={115},
-  year={2022},
-  publisher={MDPI}
-}
-
-```
-
 # Overview
 <p align="center">
 <img width=800 align="center" src = "https://user-images.githubusercontent.com/15001857/101650013-af2cf880-3a65-11eb-9f23-30e85d054011.png" alt="Overview"> </br>

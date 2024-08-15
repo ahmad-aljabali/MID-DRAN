@@ -27,6 +27,7 @@ class MIDRAN:
         
         # Model Configration 
         self.trainingImagePath = config['trainingImagePath']
+        self.noisyImagePath = config['noisyImagePath']
         #self.trainingImagePath = config['targetPath']
         self.checkpointPath = config['checkpointPath']
         self.logPath = config['logPath']
@@ -85,6 +86,7 @@ class MIDRAN:
                                                 imagePath=self.trainingImagePath,
                                                 height = self.imageH,
                                                 width = self.imageW,
+                                                noisePath = self.noisyImagePath
                                             )
 
         self.trainLoader = torch.utils.data.DataLoader( dataset=datasetReadder,
@@ -140,8 +142,8 @@ class MIDRAN:
 
             # Time tracker
             iterTime = time.time()
+
             for LRImages, HRGTImages in trainingImageLoader:
-                
                 ##############################
                 #### Initiating Variables ####
                 ##############################
@@ -163,11 +165,11 @@ class MIDRAN:
     
                 # Image Generation
                 residualNoise = self.net(rawInput)
-            
+                highResPredict = rawInput-residualNoise
                 
                 # Optimization of generator 
                 self.optimizerEG.zero_grad()
-                generatorContentLoss =  reconstructionLoss(residualNoise, highResReal)
+                generatorContentLoss =  reconstructionLoss(highResPredict, highResReal)
                                    
                 lossEG = generatorContentLoss 
                 lossEG.backward()

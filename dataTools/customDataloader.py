@@ -10,9 +10,10 @@ from dataTools.dataNormalization import *
 from dataTools.customTransform import *
 import os
 class customDatasetReader(Dataset):
-    def __init__(self, image_list, imagePath, height, width, transformation=True):
+    def __init__(self, image_list, imagePath, height, width, transformation=True, noisePath=None):
         self.image_list = image_list
         self.imagePath = imagePath
+        self.noisePath = noisePath
         self.transformLR = transforms
         self.imageH = height
         self.imageW = width
@@ -20,7 +21,7 @@ class customDatasetReader(Dataset):
         self.var = 0.1
         self.mean = 0.0
         self.pov = 0.3
-
+        
 
     def __len__(self):
         return (len(self.image_list))
@@ -40,10 +41,21 @@ class customDatasetReader(Dataset):
         # Transforms Images for training 
         self.gtImageHR = self.transformHRGT(self.gtImage)
         
-        #Noise Modeling
-        sigma = random.uniform(0, self.var ** self.pov)
-        noiseModel = torch.clamp(torch.randn(self.gtImageHR.size()).uniform_(0, 1.) * sigma  + 0., 0., 1.)
-    
-        self.inputImage = self.gtImageHR + noiseModel
+        if self.noisePath:
+            self.noiseImageFileName = self.noisePath + extractFileName(self.image_list[i])
+            self.noiseImage = Image.open(self.noiseImageFileName)
+            
+            self.noiseImageLR = self.transformHRGT(self.noiseImage)
+            noiseModel = torch.zeros(self.noiseImageLR.size())    
+
+            self.inputImage = self.noiseImageLR
         
-        return self.inputImage, noiseModel
+        else:        
+          
+            #Noise Modeling
+            sigma = random.uniform(0, self.var ** self.pov)
+            noiseModel = torch.clamp(torch.randn(self.gtImageHR.size()).uniform_(0, 1.) * sigma  + 0., 0., 1.)
+        
+            self.inputImage = self.gtImageHR + noiseModel
+            
+        return self.inputImage, self.gtImageHR
